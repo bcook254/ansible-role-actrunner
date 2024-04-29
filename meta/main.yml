@@ -1,0 +1,38 @@
+---
+dependencies: []
+
+galaxy_info:
+  namespace: bcook254
+  role_name: actrunner
+  author: Benjamin Cook
+  description: Gitea act_runner installation for Linux.
+
+  license: license (BSD, MIT)
+
+  min_ansible_version: 2.11
+
+  platforms:
+    - name: EL
+      versions:
+        - 8
+        - 9
+    - name: Fedora
+      versions:
+        - 38
+        - 39
+        - 40
+    - name: Debian
+      versions:
+        - buster
+        - bullseye
+        - bookworm
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+        - noble
+  galaxy_tags:
+    - ci
+    - cd
+    - gitea
+    - actions

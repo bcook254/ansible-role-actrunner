@@ -1,0 +1,8 @@
+---
+- name: Copy config file.
+  ansible.builtin.template:
+    src: config.yaml.j2
+    dest: "{{ actrunner_config_file }}"
+    owner: "{{ actrunner_user }}"
+    group: "{{ actrunner_group }}"
+    mode: 0644

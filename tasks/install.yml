@@ -1,0 +1,45 @@
+---
+- name: Ensure actrunner {{ actrunner_group }} exists.
+  ansible.builtin.group:
+    name: "{{ actrunner_group }}"
+    state: present
+    system: true
+
+- name: Ensure {{ actrunner_user }} user exists.
+  ansible.builtin.user:
+    name: "{{ actrunner_user }}"
+    group: "{{ actrunner_group }}"
+    home: "{{ actrunner_home_dir }}"
+    shell: /usr/sbin/nologin
+    system: true
+
+- name: Check if Act Runner is already installed.
+  ansible.builtin.command:
+    cmd: "{{ actrunner_bin_file }} --version"
+  register: __actrunner_version_result
+  ignore_errors: true
+  changed_when: false
+
+- name: Install Act Runner.
+  ansible.builtin.get_url:
+    url: "{{ actrunner_url }}"
+    dest: "{{ actrunner_bin_file }}"
+    mode: 0755
+  when: __actrunner_version_result is failed
+        or __actrunner_version_result.stdout is not search(actrunner_version)
+
+- name: Ensure Act Runner data directory exists.
+  ansible.builtin.file:
+    path: "{{ actrunner_data_dir }}"
+    owner: "{{ actrunner_user }}"
+    group: "{{ actrunner_group }}"
+    state: directory
+    mode: 0700
+
+- name: Ensure Act Runner config directory exists.
+  ansible.builtin.file:
+    path: "{{ actrunner_config_dir }}"
+    owner: "{{ actrunner_user }}"
+    group: "{{ actrunner_group }}"
+    state: directory
+    mode: 0755

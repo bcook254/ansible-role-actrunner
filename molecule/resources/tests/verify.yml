@@ -1,0 +1,17 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+
+  tasks:
+  - name: Check if Act Runner is installed.
+    ansible.builtin.stat:
+      path: /usr/local/bin/actrunner
+
+  - name: Verify correct version of Act Runner has been installed.
+    ansible.builtin.command: actrunner --version
+    args:
+      chdir: /usr/local/bin
+    changed_when: false
+    register: __actrunner_version
+    failed_when: __actrunner_version is not search('0.2.10')

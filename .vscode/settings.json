@@ -1,0 +1,4 @@
+{
+    "workbench.iconTheme": "vs-seti",
+    "ansible.python.interpreterPath": "/usr/local/python/current/bin/python"
+}

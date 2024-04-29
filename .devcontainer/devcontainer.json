@@ -1,0 +1,17 @@
+{
+    "image": "git.abcook.me/bcook254/devcontainer/ansible-dev:latest",
+    "customizations":
+    {
+        "vscode":
+        {
+            "extensions":
+            [
+                "redhat.ansible",
+                "github.vscode-github-actions"
+            ]
+        }
+    },
+    "privileged": true,
+    "remoteUser": "root",
+    "containerUser": "root"
+}

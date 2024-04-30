@@ -2,3 +2,6 @@
 */__pycache__
 *.pyc
 .cache
+
+# Env variables for molecule testing
+.env.yaml

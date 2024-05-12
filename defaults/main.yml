@@ -10,36 +10,33 @@ actrunner_config_dir: /etc/actrunner
 actrunner_config_file: "{{ actrunner_config_dir }}/config.yaml"
 actrunner_url: "https://dl.gitea.com/act_runner/{{ actrunner_version }}/act_runner-{{ actrunner_version }}-linux-{{ __architecture_map[ansible_architecture] }}"
 
+actrunner_register: false
+actrunner_name: "{{ ansible_hostname }}-runner"
+
 actrunner_manage_config: true
 
-actrunner_config:
-  log:
-    level: info
-  runner:
-    file: .runner
-    capacity: 1
-    envs:
-    env_file: .env
-    timeout: 3h
-    insecure: false
-    fetch_timeout: 5s
-    fetch_interval: 2s
-    labels:
-      - "ubuntu-latest:docker://gitea/runner-images:ubuntu-latest"
-  cache:
-    enabled: true
-    dir: ""
-    host: ""
-    port: 0
-    external_server: ""
-  container:
-    network: ""
-    privileged: false
-    options:
-    workdir_parent:
-    valid_volumes: []
-    docker_host: ""
-    force_pull: true
-    force_rebuild: false
-  host:
-    workdir_parent:
+actrunner_log_level: info
+actrunner_runner_file: .runner
+actrunner_runner_capacity: 1
+actrunner_runner_envs:
+actrunner_runner_env_file: .env
+actrunner_runner_timeout: 3h
+actrunner_runner_insecure: false
+actrunner_runner_fetch_timeout: 5s
+actrunner_runner_fetch_interval: 2s
+actrunner_runner_labels:
+  - ubuntu-latest:docker://gitea/runner-images:ubuntu-latest
+actrunner_cache_enabled: true
+actrunner_cache_dir: ""
+actrunner_cache_host: ""
+actrunner_cache_port: 0
+actrunner_cache_external_server: ""
+actrunner_container_network: ""
+actrunner_container_privileged: false
+actrunner_container_options:
+actrunner_container_workdir_parent:
+actrunner_container_valid_volumes: []
+actrunner_container_docker_host: ""
+actrunner_container_force_pull: true
+actrunner_container_force_rebuild: false
+actrunner_host_workdir_parent:

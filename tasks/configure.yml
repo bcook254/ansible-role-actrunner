@@ -6,3 +6,27 @@
     owner: "{{ actrunner_user }}"
     group: "{{ actrunner_group }}"
     mode: 0644
+
+- name: Check if Act Runner is registered.
+  ansible.builtin.slurp:
+    src: "{{ (actrunner_data_dir, actrunner_runner_file) | path_join }}"
+  ignore_errors: true
+  register: __actrunner_registration_result
+  when: actrunner_register
+
+- name: Register Act Runner.
+  # runner file must be created by the same user that actrunner runs as
+  become: true
+  become_user: "{{ actrunner_user }}"
+  ansible.builtin.command:
+    chdir: "{{ actrunner_data_dir }}"
+    cmd: >-
+      {{ actrunner_bin_file }}
+      register
+      --config {{ actrunner_config_file }}
+      --no-interactive
+      --name {{ actrunner_name }}
+      --labels {{ actrunner_runner_labels | join(',') }}
+      --instance {{ actrunner_instance }}
+      --token {{ actrunner_token }}
+  when: __actrunner_registration_result is failed

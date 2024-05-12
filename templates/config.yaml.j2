@@ -1,3 +1,31 @@
 {{ ansible_managed | comment }}
 
-{{ actrunner_config | to_yaml }}
+log:
+  level: {{ actrunner_log_level }}
+runner:
+  file: {{ actrunner_runner_file }}
+  capacity: {{ actrunner_runner_capacity }}
+  envs: {{ actrunner_runner_envs }}
+  env_file: {{ actrunner_runner_env_file }}
+  timeout: {{ actrunner_runner_timeout }}
+  insecure: {{ actrunner_runner_insecure | bool | to_json }}
+  fetch_timeout: {{ actrunner_runner_fetch_timeout }}
+  fetch_interval: {{ actrunner_runner_fetch_interval }}
+  labels: {{ actrunner_runner_labels | to_yaml }}
+cache:
+  enabled: {{ actrunner_cache_enabled | bool | to_yaml }}
+  dir: {{ actrunner_cache_dir }}
+  host: {{ actrunner_cache_host }}
+  port: {{ actrunner_cache_port }}
+  external_server: {{ actrunner_cache_external_server }}
+container:
+  network: {{ actrunner_container_network }}
+  privileged: {{ actrunner_container_privileged | bool | to_json }}
+  options: {{ actrunner_container_options }}
+  workdir_parent: {{ actrunner_container_workdir_parent }}
+  valid_volumes: {{ actrunner_container_valid_volumes }}
+  docker_host: {{ actrunner_container_docker_host }}
+  force_pull: {{ actrunner_container_force_pull | bool | to_json }}
+  force_rebuild: {{ actrunner_container_force_rebuild | bool | to_json }}
+host:
+  workdir_parent: {{ actrunner_host_workdir_parent }}

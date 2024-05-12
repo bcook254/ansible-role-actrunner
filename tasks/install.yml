@@ -1,5 +1,5 @@
 ---
-- name: Ensure actrunner {{ actrunner_group }} exists.
+- name: Ensure {{ actrunner_group }} group exists.
   ansible.builtin.group:
     name: "{{ actrunner_group }}"
     state: present
